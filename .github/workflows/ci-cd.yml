@@ -27,8 +27,8 @@ jobs:
     - name: Build & Push Node.js Image
       uses: docker/build-push-action@v5
       with:
-        context: ./node-app
-        file: ./node-app/Dockerfile
+        context: ./docker-combine-task
+        file: ./docker-combine-task/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/node-app:latest
 
@@ -36,8 +36,8 @@ jobs:
     - name: Build & Push Python Image
       uses: docker/build-push-action@v5
       with:
-        context: ./python-app
-        file: ./python-app/Dockerfile
+        context: ./py-node-combine
+        file: ./py-node-combine/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/python-app:latest
 
