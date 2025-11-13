@@ -1,0 +1,44 @@
+version: '3.9'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myappdb
+    volumes:
+      - devops-data:/var/lib/mysql
+    networks:
+      - devops-network
+
+  python:
+    image: omwarkri123/combine-task:1.0
+    container_name: python-service1
+    volumes:
+      - devops-data:/app/data
+    networks:
+      - devops-network
+
+  node:
+    image: dev-api:latest 
+    container_name:  dev-api 
+    volumes:
+      - devops-data:/usr/src/app/data
+    networks:
+      - devops-network
+
+  apache:
+    image: httpd:latest
+    container_name: apache-web
+    ports:
+      - "8080:80"
+    volumes:
+      - devops-data:/usr/local/apache2/htdocs
+    networks:
+      - devops-network
+
+networks:
+  devops-network:
+
+volumes:
+  devops-data:
